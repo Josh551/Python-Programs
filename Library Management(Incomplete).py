@@ -97,27 +97,31 @@ class faculty(object):
 def addStudent():
     '''
     A function which prompts a user to enter the details of students and returns an instance containing all info.
-    
+    The function also writes into a text file the details of the student. 
     Arguments: None
     Return: s of type Student containing all information about a student. 
     '''
-    
-    name=str(input("Enter the name of the student:"))
     regno=str(input("Enter the registration number of the student: "))
+    name=str(input("Enter the name of the student:")) 
     email=str(input("Enter the E-Mail ID of the student: "))
     while True:    
         number=str(input("Enter Phone Number of student: "))
         if(len(number)==10):
             break
         else:
-            print("Please enter a valid Phone Number.")
+            print("Please enter a valid Phone Number.")       
+    fw=open('studlist.txt','a')
+    writelist=str(name+' '+regno+' '+email+' '+number+'\n')
+    fw.write(writelist)
+    fw.close()
     s=Students(name,regno,email,number)
     return s
+
 
 def addBook():
     '''
     Function which prompts the user to enter the details of the book and returns an instance containing all the info.
-    
+    The function also writes into a text file the details of the book
     Arguments: None
     Return: b of type Books containing all the information about a book.
     '''
@@ -131,18 +135,27 @@ def addBook():
             break
         else:
             print("Please enter a valid department name.")
+    fw=open('booklist.txt','a')
+    writelist=str(isbn+' '+name+' '+author+' '+stock+' '+dept+'\n')
+    fw.write(writelist)
+    fw.close()
     b=Books(isbn,name,author,stock,dept)
     return b
 
 def addFaculty():
     '''
     Function which prompts the user to enter the details of faculty and returns an instance containing all the info.
-    
+    The function also writes into a text file the details of the Faculty
     Arguments: None
     Return: f of type faculty containing all the information about a Faculty.
     '''
     name=str(input("Enter the name of the Faculty: "))
     e_no=str(input("Enter the Employee ID of the Faculty: "))
     dept=str(input("Enter the Department of the Faculty: "))
+    fw=open('facultylist.txt','a')
+    writelist=str(name+' '+e_no+' '+dept+'\n')
+    fw.write(writelist)
+    fw.close()
     f=faculty(name,e_no,dept)
     return f
+
