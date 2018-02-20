@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Feb 13 10:07:43 2018
-
 @author: G Sriram
 """
 import os
@@ -157,7 +156,7 @@ def writeStudent(s):
     Return: None.
     '''
     fw=open('studlist.txt','a')
-    writelist=str(s.getname()+' '+s.get_rno()+' '+s.get_email()+' '+s.get_num()+'\n')
+    writelist=str(s.getname()+'$$'+s.get_rno()+'$$'+s.get_email()+'$$'+s.get_num()+'\n')
     fw.write(writelist)
     fw.close()
 
@@ -168,7 +167,7 @@ def writeBook(b):
     Return: None.
     '''
     fw=open('booklist.txt','a')
-    writelist=str(b.getisbn()+' '+b.getname()+' '+b.getauthor()+' '+b.getstock()+' '+b.getdept()+'\n')
+    writelist=str(b.getisbn()+'$$'+b.getname()+'$$'+b.getauthor()+'$$'+b.getstock()+'$$'+b.getdept()+'\n')
     fw.write(writelist)
     fw.close()
 def writeFaculty(f):
@@ -178,7 +177,7 @@ def writeFaculty(f):
     Return: None.
     '''
     fw=open('facultylist.txt','a')
-    writelist=str(f.getname()+' '+f.get_eno()+' '+f.get_dept()+'\n')
+    writelist=str(f.getname()+'$$'+f.get_eno()+'$$'+f.get_dept()+'\n')
     fw.write(writelist)
     fw.close()
 def readStudent():
@@ -190,7 +189,7 @@ def readStudent():
     fr=open('studlist.txt','r')
     a=[]
     for line in fr:
-        x=line.split(' ')
+        x=line.split('$$')
         a.append(Students(x[0],x[1],x[2],x[3]))
     fr.close()
     return a
@@ -203,7 +202,7 @@ def readBooks():
     fr=open('bookslist.txt','r')
     a=[]
     for line in fr:
-        x=line.split(' ')
+        x=line.split('$$')
         a.append(Books(x[0],x[1],x[2],x[3],x[4]))
     fr.close()
     return a
@@ -216,7 +215,7 @@ def readFaculty():
     fr=open('facultylist.txt','r')
     a=[]
     for line in fr:
-        x=line.split(' ')
+        x=line.split('$$')
         a.append(faculty(x[0],x[1],x[2]))
     fr.close()
     return a
@@ -262,10 +261,10 @@ def modifyStudent(reg_no):
     for i in studlist:
         if(i.get_rno()==reg_no):
             s=addStudent()
-            writelist=str(s.getname()+' '+s.get_rno()+' '+s.get_email()+' '+s.get_num()+'\n')
+            writelist=str(s.getname()+'$$'+s.get_rno()+'$$'+s.get_email()+'$$'+s.get_num()+'\n')
             fw.write(writelist)
         else:
-            writelist=str(i.getname()+' '+i.get_rno()+' '+i.get_email()+' '+i.get_num())
+            writelist=str(i.getname()+'$$'+i.get_rno()+'$$'+i.get_email()+'$$'+i.get_num())
             fw.write(writelist)           
     fw.close()
     os.remove('studlist.txt')
@@ -277,10 +276,10 @@ def modifyBook(isbn):
     for i in booklist:
         if(i.getisbn()==isbn):
             b=addBook()
-            writelist=str(b.getisbn()+' '+b.getname()+' '+b.getauthor()+' '+b.getstock()+' '+b.getdept()+'\n')
+            writelist=str(b.getisbn()+'$$'+b.getname()+'$$'+b.getauthor()+'$$'+b.getstock()+'$$'+b.getdept()+'\n')
             fw.write(writelist)
         else:
-            writelist=str(i.getisbn()+' '+i.getname()+' '+i.getauthor()+' '+i.getstock()+' '+i.getdept())
+            writelist=str(i.getisbn()+'$$'+i.getname()+'$$'+i.getauthor()+'$$'+i.getstock()+'$$'+i.getdept())
             fw.write(writelist)           
     fw.close()
     os.remove('booklist.txt')
@@ -291,11 +290,49 @@ def modifyFaculty(e_no):
     for i in flist:
         if(i.get_eno()==e_no):
             f=addFaculty()
-            writelist=str(f.getname()+' '+f.get_eno()+' '+f.get_dept()+'\n')
+            writelist=str(f.getname()+'$$'+f.get_eno()+'$$'+f.get_dept()+'\n')
             fw.write(writelist)
         else:
-            writelist=str(i.getname()+' '+i.get_eno()+' '+i.get_dept())
+            writelist=str(i.getname()+'$$'+i.get_eno()+'$$'+i.get_dept())
             fw.write(writelist)    
     fw.close()
     os.remove('facultylist.txt')
-    os.rename('facultylist1.txt','facultylist.txt')   
+    os.rename('facultylist1.txt','facultylist.txt') 
+def deleteStudent(reg_no):
+    studlist=readStudent()
+    fw=open('studlist1.txt','a')
+    for i in studlist:
+        if(i.get_rno()==reg_no):
+            continue
+        else:
+            writelist=str(i.getname()+'$$'+i.get_rno()+'$$'+i.get_email()+'$$'+i.get_num())
+            fw.write(writelist)           
+    fw.close()
+    os.remove('studlist.txt')
+    os.rename('studlist1.txt','studlist.txt')
+
+def deleteBook(isbn):
+    booklist=readBooks()
+    fw=open('booklist1.txt','a')
+    for i in booklist:
+        if(i.getisbn()==isbn):
+            continue
+        else:
+            writelist=str(i.getisbn()+'$$'+i.getname()+'$$'+i.getauthor()+'$$'+i.getstock()+'$$'+i.getdept())
+            fw.write(writelist)           
+    fw.close()
+    os.remove('booklist.txt')
+    os.rename('booklist1.txt','booklist.txt')
+
+def deleteFaculty(e_no):
+    flist=readFaculty()
+    fw=open('facultylist1.txt','a')
+    for i in flist:
+        if(i.get_eno()==e_no):
+            continue
+        else:
+            writelist=str(i.getname()+'$$'+i.get_eno()+'$$'+i.get_dept())
+            fw.write(writelist)    
+    fw.close()
+    os.remove('facultylist.txt')
+    os.rename('facultylist1.txt','facultylist.txt') 
