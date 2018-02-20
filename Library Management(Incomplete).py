@@ -277,7 +277,7 @@ def modifyStudent(reg_no):
     
 def modifyBook(isbn):
     '''
-    Function to Modify list of Book, given the registration number.
+    Function to Modify list of Book, given the ISBN.
     Arguments: isbn of type string.
     Return: None
     '''
@@ -296,7 +296,7 @@ def modifyBook(isbn):
     os.rename('booklist1.txt','booklist.txt')
 def modifyFaculty(e_no):
     '''
-    Function to Modify list of faculty, given the registration number.
+    Function to Modify list of faculty, given the Employee.
     Arguments: e_no of type string.
     Return: None
     '''
@@ -333,7 +333,7 @@ def deleteStudent(reg_no):
 
 def deleteBook(isbn):
     '''
-    Function to delete a book, given the registration number.
+    Function to delete a book, given the ISBN.
     Arguments: isbn of type string.
     Return: None
     '''
