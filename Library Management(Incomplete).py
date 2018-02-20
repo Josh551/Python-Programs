@@ -256,6 +256,11 @@ def searchFaculty(eno):
     print("Faculty not found!") 
 
 def modifyStudent(reg_no):
+    '''
+    Function to Modify list of students, given the registration number.
+    Arguments: reg_no of type string.
+    Return: None
+    '''
     studlist=readStudent()
     fw=open('studlist1.txt','a')
     for i in studlist:
@@ -271,6 +276,11 @@ def modifyStudent(reg_no):
     os.rename('studlist1.txt','studlist.txt')
     
 def modifyBook(isbn):
+    '''
+    Function to Modify list of Book, given the registration number.
+    Arguments: isbn of type string.
+    Return: None
+    '''
     booklist=readBooks()
     fw=open('booklist1.txt','a')
     for i in booklist:
@@ -285,6 +295,11 @@ def modifyBook(isbn):
     os.remove('booklist.txt')
     os.rename('booklist1.txt','booklist.txt')
 def modifyFaculty(e_no):
+    '''
+    Function to Modify list of faculty, given the registration number.
+    Arguments: e_no of type string.
+    Return: None
+    '''
     flist=readFaculty()
     fw=open('facultylist1.txt','a')
     for i in flist:
@@ -299,6 +314,11 @@ def modifyFaculty(e_no):
     os.remove('facultylist.txt')
     os.rename('facultylist1.txt','facultylist.txt') 
 def deleteStudent(reg_no):
+    '''
+    Function to delete a student, given the registration number.
+    Arguments: reg_no of type string.
+    Return: None
+    '''
     studlist=readStudent()
     fw=open('studlist1.txt','a')
     for i in studlist:
@@ -312,6 +332,11 @@ def deleteStudent(reg_no):
     os.rename('studlist1.txt','studlist.txt')
 
 def deleteBook(isbn):
+    '''
+    Function to delete a book, given the registration number.
+    Arguments: isbn of type string.
+    Return: None
+    '''
     booklist=readBooks()
     fw=open('booklist1.txt','a')
     for i in booklist:
@@ -325,6 +350,11 @@ def deleteBook(isbn):
     os.rename('booklist1.txt','booklist.txt')
 
 def deleteFaculty(e_no):
+    '''
+    Function to delete a faculty, given the employee number.
+    Arguments: e_no of type string.
+    Return: None
+    '''
     flist=readFaculty()
     fw=open('facultylist1.txt','a')
     for i in flist:
