@@ -140,6 +140,9 @@ def searchTimeTable(e_no):
             return i
         
 def modifyFaculty(e_no):
+    '''
+    Function which modifies the faculty details given the Employee ID
+    '''
     flist=readFaculty()
     fw=open('FacultyDetails1.file','ab')
     for i in flist:
@@ -153,6 +156,9 @@ def modifyFaculty(e_no):
     os.rename('FacultyDetails1.file','FacultyDetails.file')
     
 def modifyTimeTable(e_no):
+    '''
+    Function which modifies the Time Table given the Employee ID
+    '''
     flist=readTimeTable()
     fw=open('TimeTable1.file','ab')
     for i in flist:
@@ -166,6 +172,9 @@ def modifyTimeTable(e_no):
     os.rename('TimeTable1.file','TimeTable.file')
     
 def deleteFaculty(e_no):
+    '''
+    Function which erases the faculty details and timetable given the Employee ID
+    '''
     flist=readFaculty()
     fw=open('FacultyDetails1.file','ab')
     for i in flist:
@@ -189,16 +198,25 @@ def deleteFaculty(e_no):
     os.rename('TimeTable1.file','TimeTable.file')
     
 def get_daily_timeTable(e_no,day):
+    '''
+    Function which returns the timetable of a faculty for a specific day
+    '''
     a=searchTimeTable(e_no)
     i=days.index(day)
     x=a.getTimeTable()
     return (e_no,x[i])
 
 def get_free_hrs(e_no,day):
+    '''
+    Function which returns the number of free hours the faculty has per day
+    '''
     a=get_daily_timeTable(e_no,day)
     return a[1].count('X')
     
 def findFreeSubstitute(e_no,day,hr):
+    '''
+    Function which returns the Faculties who are free in the specified hour and day sorted by how free they are
+    '''
     x=get_daily_timeTable(e_no,day)
     y=x[1][hr-1]
     if y=='X':
@@ -222,6 +240,9 @@ def findFreeSubstitute(e_no,day,hr):
     return b
 
 def findLabSubstitute(e_no,day,hr):
+    '''
+    Function which returns the Faculties who are not free but have a lab session in the specified hour and day sorted by how free they are
+    '''
     x=get_daily_timeTable(e_no,day)
     y=x[1][hr-1]
     if y=='X':
@@ -245,9 +266,13 @@ def findLabSubstitute(e_no,day,hr):
     return b
 
 def menu():
+    '''
+    Function which creates a user interface
+    '''
     while True:
         os.system('cls')
         print("Main Menu".center(40))
+        print()
         print("1. Add New Faculty")
         print("2. Add New Time Table for Faculty")
         print("3. Modify Faculty Details")
@@ -260,7 +285,7 @@ def menu():
             break
         else:
             print("Please Enter a valid choice!")
-            input("Press <Enter> to return back to the menu.")   
+            input("\n\nPress <Enter> to return back to the menu.")   
             menu()
     if(ch==1):
         os.system('cls')
@@ -268,7 +293,7 @@ def menu():
         f=enterFacultyDetails()
         writeFaculty(f)
         print("Faculty Successfully added!")
-        input("Press <Enter> to return back to the menu.")
+        input("\n\nPress <Enter> to return back to the menu.")
         menu()
     if(ch==2):
         os.system('cls')
@@ -286,12 +311,12 @@ def menu():
         e_no=str(input("Enter the Employee ID of the Faculty: "))
         if(searchFaculty(e_no)==None):
             print("Faculty Not Found!")
-            input("Press <Enter> to return back to the menu.")
+            input("\n\nPress <Enter> to return back to the menu.")
             menu()
         tt=enterTimeTable(e_no)
         writeTimeTable(tt)
         print("Time Table Succesfully Added!")
-        input("Press <Enter> to return back to the menu.")
+        input("\n\nPress <Enter> to return back to the menu.")
         menu()
         
     if(ch==3):
@@ -306,7 +331,7 @@ def menu():
         except:
             print("Faculty not found/Unable to modify the details.")
         finally:
-            input("Press <Enter> to return back to the menu.")
+            input("\n\nPress <Enter> to return back to the menu.")
             menu() 
     if(ch==4):
         os.system('cls')
@@ -331,7 +356,7 @@ def menu():
         except:
             print("Faculty not found/Unable to modify the details.")
         finally:
-            input("Press <Enter> to return back to the menu.")
+            input("\n\nPress <Enter> to return back to the menu.")
             menu()  
     if(ch==5):
         try:
@@ -344,37 +369,39 @@ def menu():
         except:
             print("Faculty not found/Unable to delete the details.")
         finally:
-            input("Press <Enter> to return back to the menu.")
+            input("\n\nPress <Enter> to return back to the menu.")
             menu()
     if(ch==6):
        os.system('cls')
        print("Find Substitute Faculty".center(40))
-       e_no=str(input("Enter the Employee ID of the Faculty who is absent: "))
+       e_no=str(input("\nEnter the Employee ID of the Faculty who is absent: "))
        if(searchFaculty(e_no)==None):
            print("Faculty Not Found!")
            input("Press <Enter> to return back to the menu.")
            menu()
-       day=str(input("Enter the day today: "))
-       hr=int(input("Enter the hour to be substituted for: "))
+       day=str(input("\nEnter the day today: "))
+       hr=int(input("\nEnter the hour to be substituted for: "))
        os.system('cls')
+       m=searchFaculty(e_no)
+       print("\n\nFaculty absent:",m.get_name(),'\n\n')
        try:
            x=findFreeSubstitute(e_no,day,hr)
            y=findLabSubstitute(e_no,day,hr)
        except ValueError:
            print("The faculty is free during the hour.")
        else:
-           print("Faculties who are free during the specified hour: ")
+           print("Faculties who are free during the specified hour: \n")
            count=1
            for i in x:
                print(str(count)+". "+i.get_name())
                count+=1
-           print("Faculties who are not free but have a lab session: ")
+           print("\n\nFaculties who are not free but have a lab session: \n")
            count=1
            for i in y:
                print(str(count)+'. '+i.get_name())
                count+=1
        finally:
-           input("Press <Enter> to return back to the menu")
+           input("\n\nPress <Enter> to return back to the menu")
            menu()
 print("Time Table Management System".center(40))
 print()
