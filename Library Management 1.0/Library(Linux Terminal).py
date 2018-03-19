@@ -757,7 +757,7 @@ def menu():
             menu()
             
     if(ch==13):
-        system('clear')
+        os.system('clear')
         reg_no=input("Enter the Registration Number of the Student: ")
         isbn=input("Enter the ISBN of the Book to be issued: ")
         if(searchBooks(isbn)==None):
