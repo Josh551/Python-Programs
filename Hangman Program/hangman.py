@@ -1,43 +1,4 @@
-import random
-
-WORDLIST_FILENAME = "words.txt"
-
-def loadWords():
-    """
-    Returns a list of valid words. Words are strings of lowercase letters.
-    
-    Depending on the size of the word list, this function may
-    take a while to finish.
-    """
-    print("Loading word list from file...")
-    # inFile: file
-    inFile = open(WORDLIST_FILENAME, 'r')
-    # line: string
-    line = inFile.readline()
-    # wordlist: list of strings
-    wordlist = line.split()
-    print("  ", len(wordlist), "words loaded.")
-    return wordlist
-
-def chooseWord(wordlist):
-    """
-    wordlist (list): list of words (strings)
-
-    Returns a word from wordlist at random
-    """
-    return random.choice(wordlist)
-
-
-wordlist = loadWords()
-
-def isWordGuessed(secretWord, lettersGuessed):
-    '''
-    secretWord: string, the word the user is guessing
-    lettersGuessed: list, what letters have been guessed so far
-    returns: boolean, True if all the letters of secretWord are in lettersGuessed;
-      False otherwise
-    '''
-    i=' '
+i
     count=len(secretWord)
     for i in lettersGuessed:
         if(i in secretWord):
